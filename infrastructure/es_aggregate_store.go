@@ -2,6 +2,7 @@ package infrastructure
 
 import (
 	"reflect"
+	"strings"
 
 	"github.com/EventStore/EventStore-Client-Go/esdb"
 	"github.com/EventStore/training-introduction-go/eventsourcing"
@@ -47,5 +48,7 @@ func (s *EsAggregateStore) Load(aggregateId string, aggregate eventsourcing.Aggr
 }
 
 func (s *EsAggregateStore) getStreamName(aggregate eventsourcing.AggregateRoot, aggregateId string) string {
-	return reflect.ValueOf(aggregate).Type().String() + "-" + aggregateId
+	name := strings.Split(reflect.TypeOf(aggregate).String(), ".")
+	return name[len(name)-1] + "-" + aggregateId
+
 }

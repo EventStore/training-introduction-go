@@ -1,17 +1,14 @@
 package main
 
 import (
-	"context"
 	"net/http"
 
 	"github.com/EventStore/EventStore-Client-Go/esdb"
-	"github.com/EventStore/training-introduction-go/application"
 	"github.com/EventStore/training-introduction-go/controllers"
 	"github.com/EventStore/training-introduction-go/domain/writemodal"
 	"github.com/EventStore/training-introduction-go/domain/writemodal/events"
 	"github.com/EventStore/training-introduction-go/infrastructure"
 	"github.com/EventStore/training-introduction-go/infrastructure/inmemory"
-	"github.com/EventStore/training-introduction-go/infrastructure/projections"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -31,10 +28,10 @@ func main() {
 	aggregateStore := infrastructure.NewEsAggregateStore(eventStore)
 	asr := inmemory.NewInMemoryAvailableSlotsRepository()
 	psr := inmemory.NewInMemoryPatientSlotsRepository()
-	subManager := projections.NewSubscriptionManager(db, f,
-		projections.NewProjector(application.NewAvailableSlotsProjection(asr)),
-		projections.NewProjector(application.NewPatientSlotsProjection(psr)))
-	subManager.Start(context.Background())
+	//subManager := projections.NewSubscriptionManager(db, f,
+	//	projections.NewProjector(application.NewAvailableSlotsProjection(asr)),
+	//	projections.NewProjector(application.NewPatientSlotsProjection(psr)))
+	//subManager.Start(context.Background())
 
 	c := infrastructure.NewCommandHandlerMap(writemodal.NewSlotHandlers(aggregateStore))
 	d := infrastructure.NewDispatcher(c)

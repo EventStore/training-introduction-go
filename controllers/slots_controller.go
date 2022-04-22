@@ -28,7 +28,6 @@ func NewSlotsController(d infrastructure.Dispatcher, a readmodel.AvailableSlotsR
 	}
 }
 
-
 func (c *SlotsController) Register(e *echo.Echo) {
 	e.GET("/slots/available/:date", c.AvailableHandler)
 	e.GET("/slots/my-slots/:patientId", c.MySlotsHandler)
@@ -67,29 +66,11 @@ func (c *SlotsController) ScheduleHandler(ctx echo.Context) error {
 }
 
 func (c *SlotsController) BookHandler(ctx echo.Context) error {
-	req := BookRequest{}
-	if err := ctx.Bind(&req); err != nil {
-		return ctx.String(http.StatusBadRequest, err.Error())
-	}
-
-	err := c.dispatcher.Dispatch(commands.NewBookCommand(ctx.Param("slotId"), req.PatientId))
-	if err != nil {
-		return ctx.String(http.StatusBadRequest, err.Error())
-	}
 
 	return ctx.NoContent(http.StatusOK)
 }
 
 func (c *SlotsController) CancelHandler(ctx echo.Context) error {
-	req := CancelRequest{}
-	if err := ctx.Bind(&req); err != nil {
-		return ctx.String(http.StatusBadRequest, err.Error())
-	}
-
-	err := c.dispatcher.Dispatch(commands.NewCancelCommand(ctx.Param("slotId"), req.Reason, time.Now()))
-	if err != nil {
-		return ctx.String(http.StatusBadRequest, err.Error())
-	}
 
 	return ctx.NoContent(http.StatusOK)
 }

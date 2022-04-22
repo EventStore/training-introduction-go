@@ -29,14 +29,14 @@ func TestSlotAggregate(t *testing.T) {
 	t.Run("ShouldBeScheduled", a.ShouldBeScheduled)
 	t.Run("ShouldNotBeDoubleScheduled", a.ShouldNotBeDoubleScheduled)
 	// Booking
-	t.Run("ShouldBeBooked", a.ShouldBeBooked)
-	t.Run("ShouldNotBeBookedIfWasNotScheduled", a.ShouldNotBeBookedIfWasNotScheduled)
-	t.Run("CantBeDoubleBooked", a.CantBeDoubleBooked)
+	//t.Run("ShouldBeBooked", a.ShouldBeBooked)
+	//t.Run("ShouldNotBeBookedIfWasNotScheduled", a.ShouldNotBeBookedIfWasNotScheduled)
+	//t.Run("CantBeDoubleBooked", a.CantBeDoubleBooked)
 	// Cancellation
-	t.Run("CanBeCancelled", a.CanBeCancelled)
-	t.Run("CancelledSlotCanBeBookedAgain", a.CancelledSlotCanBeBookedAgain)
-	t.Run("CantBeCancelledAfterStartTime", a.CantBeCancelledAfterStartTime)
-	t.Run("CantBeCancelledIfWasNotBooked", a.CantBeCancelledIfWasNotBooked)
+	//t.Run("CanBeCancelled", a.CanBeCancelled)
+	//t.Run("CancelledSlotCanBeBookedAgain", a.CancelledSlotCanBeBookedAgain)
+	//t.Run("CantBeCancelledAfterStartTime", a.CantBeCancelledAfterStartTime)
+	//t.Run("CantBeCancelledIfWasNotBooked", a.CantBeCancelledIfWasNotBooked)
 }
 
 func (t *SlotTests) ShouldBeScheduled(tt *testing.T) {

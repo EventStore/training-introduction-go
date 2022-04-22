@@ -32,35 +32,13 @@ func NewSlotHandlers(store infrastructure.AggregateStore) SlotHandlers {
 		return store.Save(aggregate)
 	})
 
-	commandHandler.Register(commands.Book{}, func(s infrastructure.Command) error {
-		ss := s.(commands.Book)
-		aggregate := NewSlotAggregate()
-		err := store.Load(ss.SlotId, aggregate)
-		if err != nil {
-			return err
-		}
-		err = aggregate.Book(ss.PatientId)
-		if err != nil {
-			return err
-		}
-
-		return store.Save(aggregate)
-	})
-
-	commandHandler.Register(commands.Cancel{}, func(s infrastructure.Command) error {
-		c := s.(commands.Cancel)
-		aggregate := NewSlotAggregate()
-		err := store.Load(c.SlotId, aggregate)
-		if err != nil {
-			return err
-		}
-		err = aggregate.Cancel(c.Reason, c.CancellationTime)
-		if err != nil {
-			return err
-		}
-
-		return store.Save(aggregate)
-	})
+	//commandHandler.Register(commands.Book{}, func(s infrastructure.Command) error {
+	//
+	//})
+	//
+	//commandHandler.Register(commands.Cancel{}, func(s infrastructure.Command) error {
+	//
+	//})
 
 	return commandHandler
 }
